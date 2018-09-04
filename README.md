@@ -5,7 +5,7 @@ SCRIPT DEAL
 
 Thanks the original url https://github.com/chuckcho/video-caffe
 
-1.Download UCF-101 at http://crcv.ucf.edu/data/UCF101.php and 'unrar x UCF101.rar' to Dataset/UCF-101/
+1.Download UCF-101 dataset at http://crcv.ucf.edu/data/UCF101.php and 'unrar x UCF101.rar' to Dataset/UCF-101/
 
 2.install ffmepg (if you have installed opencv, ffmpeg exists)
  
@@ -14,5 +14,5 @@ Thanks the original url https://github.com/chuckcho/video-caffe
 4.cd script && sh extract_UCF-101_frames.sh
 
 PYTHON DEAL
-
+......
 
