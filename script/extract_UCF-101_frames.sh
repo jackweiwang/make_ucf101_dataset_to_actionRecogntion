@@ -9,37 +9,32 @@ FFMPEGBIN=ffmpeg
 
 cd ${UCF101DIR}
 
-for f in ./*/*.avi; do
+for f in *.avi; do
   dir=${f::-4}
-  subrdir=${f%/*}
-  subldir=${subrdir#*/}
   dir2=${f::-12}
-  dirr=${dir2##*/}
+
   echo -----
   echo Extracting frames from ${f} into ${dir}...
 
-  if [[ ! -d ${dirr} ]]; then
-    echo Creating directory=${dirr}
-    mkdir  ${dirr}
+  if [[ ! -d ${dir2} ]]; then
+    echo Creating directory=${dir2}
+    mkdir  ${dir2}
   fi
 
-  cd ${dirr}
+  cd ${dir2}
 
-  if [[ ! -d ${subldir} ]]; then
-    echo Creating directory=${subldir}
-    mkdir  ${subldir}
+  if [[ ! -d ${dir} ]]; then
+    echo Creating directory=${dir}
+    mkdir  ${dir}
   fi
 
   cd ..
  
-  extractdir=${dirr}/${subldir}
+  extractdir=${dir2}/${dir}
 
   ${FFMPEGBIN} \
     -i ${f} \
     ${extractdir}/image_%4d.jpg
-
-  #cd ..
-  #echo delete ${subldir}...
 
 done
 
