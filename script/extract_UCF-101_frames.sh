@@ -2,24 +2,45 @@
 
 #############################################
 # modify the UCF-101 data directory:
-UCF101DIR=../Dataset/UCF-101/
-
+UCF101DIR=./temp
 # and, make sure ffmpeg is installed
 FFMPEGBIN=ffmpeg
 #############################################
 
-for f in ${UCF101DIR}/*.avi; do
+cd ${UCF101DIR}
+
+for f in ./*/*.avi; do
   dir=${f::-4}
+  subrdir=${f%/*}
+  subldir=${subrdir#*/}
+  dir2=${f::-12}
+  dirr=${dir2##*/}
   echo -----
   echo Extracting frames from ${f} into ${dir}...
-  if [[ ! -d ${dir} ]]; then
-    echo Creating directory=${dir}
-    mkdir -p ${dir}
+
+  if [[ ! -d ${dirr} ]]; then
+    echo Creating directory=${dirr}
+    mkdir  ${dirr}
   fi
+
+  cd ${dirr}
+
+  if [[ ! -d ${subldir} ]]; then
+    echo Creating directory=${subldir}
+    mkdir  ${subldir}
+  fi
+
+  cd ..
+ 
+  extractdir=${dirr}/${subldir}
 
   ${FFMPEGBIN} \
     -i ${f} \
-    ${dir}/image_%4d.jpg
+    ${extractdir}/image_%4d.jpg
+
+  #cd ..
+  #echo delete ${subldir}...
+
 done
 
 echo -------------------------------------------
